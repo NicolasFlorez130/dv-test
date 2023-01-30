@@ -11,7 +11,8 @@ const config = {
             'github-space': "url('./src/assets/github-background.png')"
          },
          colors: {
-            'space-black': '#25272B'
+            'space-black': '#25272B',
+            'offWhite': '#F7F7F7'
          }
       },
    },
