@@ -9,7 +9,7 @@ interface Props {
 
 const InfoValidator = ({ found, loading, children }: Props) => {
    return (
-      <div className="bg-offWhite flex items-center min-h-screen">
+      <div className="bg-offWhite flex justify-center items-center min-h-screen">
          {!loading ? found ? children : <NotFoundScreen /> : <LoadingScreen />}
       </div>
    );

@@ -1,8 +1,15 @@
 import { ReactRouter, RootRoute, Route } from '@tanstack/react-router';
+import AppLayout from '../layouts/AppLayout';
 import Home from '../pages/Home/Home';
 import Profile from '../pages/Profile/Profile';
 
 const rootRoute = new RootRoute();
+
+const appLayout = new Route({
+   getParentRoute: () => rootRoute,
+   id: 'app-layout',
+   component: AppLayout,
+});
 
 const homeRoute = new Route({
    getParentRoute: () => rootRoute,
@@ -16,7 +23,7 @@ const profileRoute = new Route({
    component: Profile,
 });
 
-const routeTree = rootRoute.addChildren([homeRoute, profileRoute]);
+const routeTree = rootRoute.addChildren([appLayout.addChildren([homeRoute, profileRoute])]);
 
 export const router = new ReactRouter({ routeTree });
 

@@ -1,8 +1,5 @@
-import { Button, Card, CardBody, CardFooter, CardHeader } from '@material-tailwind/react';
-import { useNavigate } from '@tanstack/react-router';
 import { Users } from '../../../../types/api';
-import Keys from '../../../core/keys';
-import UserCard from './USerCard';
+import UserCard from './UserCard';
 
 interface Props {
    users: Users;
@@ -10,12 +7,10 @@ interface Props {
 }
 
 const UsersList = ({ users, query }: Props) => {
-   const navigate = useNavigate({ from: '/' });
-
    return (
-      <div className="users-list | flex flex-col gap-10 m-4">
+      <div className="users-list | grid gap-10 m-4 sm:grid-cols-2 sm:gap-y-6 sm:gap-x-4 lg:grid-cols-2 2xl:grid-cols-3">
          {users.items.map(user => (
-            <UserCard navigate={navigate} query={query} user={user} key={user.id} />
+            <UserCard query={query} user={user} key={user.id} />
          ))}
       </div>
    );

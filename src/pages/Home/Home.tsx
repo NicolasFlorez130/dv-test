@@ -9,7 +9,7 @@ import UsersList from './components/UsersList';
 const Home = () => {
    const [list, setList] = useState<Users>();
    const [string, setString] = useState('');
-   const [isLoading, setIsLoading] = useState<boolean>(false);
+   const [isLoading, setIsLoading] = useState(false);
 
    const lastSearch = useRef<string>();
 
@@ -20,52 +20,67 @@ const Home = () => {
       setList(undefined);
 
       if (string) {
-         setList((await getUsersByString(string)).data);
-         lastSearch.current = string;
+         try {
+            setList((await getUsersByString(string)).data);
+            lastSearch.current = string;
+         } catch (error) {
+            console.error(error);
+         }
       }
 
       setIsLoading(false);
    };
 
    useEffect(() => {
-      // const query = sessionStorage.getItem(Keys.query.toString());
-      // if (query) {
-      //    setString(query);
-      //    getUsers(query);
-      // }
+      const query = sessionStorage.getItem(Keys.query.toString());
+      if (query) {
+         setString(query);
+         getUsers(query);
+      }
    }, []);
 
    return (
-      <main className="bg-offWhite min-h-screen">
-         <section className="searcher | p-4">
-            <h1 className="text-2xl text-center text-deep-purple-500">
-               Welcome to the Github profile finder
-            </h1>
-            <div className="input-container | gap-2 grid grid-cols-[3fr_1fr] mt-4">
-               <Input
-                  value={string}
-                  onChange={e => setString(e.target.value)}
-                  color="deep-purple"
-                  label="Search"
-               />
-               <Button onClick={() => getUsers(string)} color="deep-purple" className="capitalize">
-                  Find
-               </Button>
-            </div>
-         </section>
-         <section className="flex flex-col m-4">
-            {list && !isLoading ? (
-               <>
-                  <UsersList users={list} query={string} />
-                  <p className="text-justify text-gray-800">
-                     The app only shows 30 results from the query, if you want to see other profiles
-                     you have to write something more specific in the prompt.
-                  </p>
-               </>
-            ) : (
-               <LoadingScreen />
-            )}
-         </section>
+      <main className="bg-offWhite flex justify-center min-h-screen pt-20">
+         <div className="sub-container | grid grid-rows-[auto_1fr] max-w-screen-xl w-full">
+            <section className="searcher | p-4">
+               <h1 className="font-bold text-2xl text-center text-deep-purple-500 md:text-3xl md:my-4">
+                  Welcome to the Github profile finder
+               </h1>
+               <div className="input-container | gap-2 grid grid-cols-[3fr_1fr] mt-4">
+                  <Input
+                     value={string}
+                     onChange={e => setString(e.target.value)}
+                     color="deep-purple"
+                     label="Search"
+                  />
+                  <Button
+                     onClick={() => getUsers(string)}
+                     color="deep-purple"
+                     className="capitalize">
+                     Find
+                  </Button>
+               </div>
+            </section>
+            <section className="flex flex-col">
+               {list ? (
+                  <>
+                     <UsersList users={list} query={string} />
+                     <p className="m-4 mt-0 text-justify text-gray-800 md:text-center">
+                        The app only shows 30 results from the query, if you want to see other
+                        profiles you have to write something more specific in the prompt.
+                     </p>
+                  </>
+               ) : isLoading ? (
+                  <LoadingScreen />
+               ) : (
+                  <div className="h-full grid content-center">
+                     <p className="m-4 text-center text-xl text-deep-purple-500">
+                        You can start searching with the input above.
+                     </p>
+                  </div>
+               )}
+            </section>
+         </div>
       </main>
    );
 };

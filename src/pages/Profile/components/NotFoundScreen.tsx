@@ -6,7 +6,7 @@ const NotFoundScreen = () => {
          <h1 className="font-bold text-3xl text-center">
             We're sorry, the user you're trying to find doesn't exists
          </h1>
-         <img src={octocat} />
+         <img src={octocat} alt="octocat sad" />
       </div>
    );
 };
