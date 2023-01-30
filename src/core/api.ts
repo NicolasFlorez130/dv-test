@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FullUser, Repo, User, Users } from './../../types/api.d';
+import { FullUser, Repo, Users } from './../../types/api.d';
 
 const baseUrl = 'https://api.github.com';
 

@@ -13,17 +13,17 @@ const appLayout = new Route({
 
 const homeRoute = new Route({
    getParentRoute: () => rootRoute,
-   path: '/',
+   path: '/dv-test',
    component: Home,
 });
 
 const profileRoute = new Route({
    getParentRoute: () => rootRoute,
-   path: '/$username',
+   path: '/dv-test/$username',
    component: Profile,
 });
 
-const routeTree = rootRoute.addChildren([appLayout.addChildren([homeRoute, profileRoute])]);
+const routeTree = rootRoute.addChildren([appLayout.addChildren([profileRoute, homeRoute])]);
 
 export const router = new ReactRouter({ routeTree });
 

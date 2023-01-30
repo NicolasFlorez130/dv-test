@@ -2,7 +2,6 @@ import { useMatch } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import { FullUser, Repo, User } from '../../../types/api';
 import { getPopulatedUserData } from '../../core/api';
-import Repository from './components/Repository';
 import ReposList from './components/ReposList';
 import Stat from './components/Stat';
 import InfoValidator from './hocs/InfoValidator';
@@ -14,7 +13,7 @@ const Profile = () => {
    const [loading, setLoading] = useState<boolean>(true);
    const [found, setFound] = useState<boolean>(false);
 
-   const { params } = useMatch({ from: '/$username' });
+   const { params } = useMatch({ from: '/dv-test/$username' });
 
    const populateData = async () => {
       try {

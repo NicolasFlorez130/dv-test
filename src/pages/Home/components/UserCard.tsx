@@ -29,7 +29,7 @@ const UserCard = ({ user, query }: Props) => {
             <Button
                onClick={e => {
                   sessionStorage.setItem(Keys.query.toString(), fixedQuery);
-                  navigate({ to: `/$username`, params: { username: user.login } });
+                  navigate({ to: `/dv-test/$username`, params: { username: user.login } });
                }}
                color="deep-purple"
                className="">

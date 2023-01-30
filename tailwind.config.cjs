@@ -8,7 +8,7 @@ const config = {
    theme: {
       extend: {
          backgroundImage: {
-            'github-space': "url('./src/assets/github-background.png')"
+            // 'github-space': "url('./src/assets/github-background.png')"
          },
          colors: {
             'space-black': '#25272B',
